@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Color.h" />
     <ClInclude Include="Source\Framebuffer.h" />
+    <ClInclude Include="Source\Ray.h" />
     <ClInclude Include="Source\Renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
