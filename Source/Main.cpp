@@ -1,7 +1,10 @@
 #include "Renderer.h"
 #include "Framebuffer.h"
 #include "Camera.h"
+#include "Scene.h"
+#include "Sphere.h"
 
+#include <random>
 #include <iostream>
 
 int main() {
@@ -15,9 +18,22 @@ int main() {
 
 	Framebuffer framebuffer(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 	
-	float aspectRatio = (framebuffer.width / framebuffer.height);
+	float aspectRatio = ((float)framebuffer.width / framebuffer.height);
 	Camera camera(70.0f, aspectRatio);
 	camera.SetView({ 0, 0, 5 }, { 0, 0, 0 });
+
+	Scene scene;
+	scene.SetSky({ 1, 1, 1 }, { 0, 0, 0 });
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<float> dist(-3.0f, 3.0f);
+
+	for (int i = 0; i < 5; i++) {
+		glm::vec3 position{ dist(gen), dist(gen), dist(gen) };
+		auto sphere = std::make_unique<Sphere>(position, 1.0f, color3_t{ 1, 0, 0 });
+		scene.AddObject(std::move(sphere));
+	}
 
 	SDL_Event event;
 	bool quit = false;
@@ -36,7 +52,7 @@ int main() {
 
 		// draw to frame buffer
 		framebuffer.Clear({ 0, 0, 0, 255 });
-		for (int i = 0; i < 300; i++) framebuffer.DrawPoint(rand() % SCREEN_WIDTH, rand() % SCREEN_HEIGHT, { 255, 255, 255, 255 });
+		scene.Render(framebuffer, camera, 50);
 
 		// update frame buffer, copy buffer pixels to texture
 		framebuffer.Update();

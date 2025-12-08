@@ -11,7 +11,7 @@ public:
 	void SetFOV(float fov) { this->fov = fov; CalculateViewPlane(); }
 
 	// get ray from point on the view plane
-	Ray GetRay(const glm::vec2& uv) const;
+	ray_t GetRay(const glm::vec2& uv) const;
 
 private:
 	void CalculateViewPlane();

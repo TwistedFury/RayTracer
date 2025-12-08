@@ -14,8 +14,8 @@ void Camera::SetView(const glm::vec3& eye, const glm::vec3& target, const glm::v
 	CalculateViewPlane();
 }
 
-Ray Camera::GetRay(const glm::vec2& uv) const {
-	Ray ray;
+ray_t Camera::GetRay(const glm::vec2& uv) const {
+	ray_t ray;
 
 	//ray.origin = camera eye
 	ray.origin = eye;
