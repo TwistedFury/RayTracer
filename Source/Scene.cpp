@@ -34,12 +34,11 @@ void Scene::Render(Framebuffer& framebuffer, const Camera& camera, int numSample
 
 				// get ray from camera
 				ray_t ray = camera.GetRay(point);
-				raycastHit_t raycastHit;
 				// trace ray
-				color += Trace(ray, 0, 100, raycastHit);
+				color += Trace(ray, 0, 100);
 			}
 			// get average color = (color / number samples)
-			color = color3_t{ 0.5f, 0.5f, 0.5f };
+			color = GetAverageColor(color, numSamples);
 			framebuffer.DrawPoint(x, y, ColorConvert(color));
 		}
 	}
@@ -49,10 +48,11 @@ void Scene::AddObject(std::unique_ptr<Object> object) {
 	objects.push_back(std::move(object));
 }
 
-color3_t Scene::Trace(const ray_t& ray, float minDistance, float maxDistance, raycastHit_t& raycastHit) {
+color3_t Scene::Trace(const ray_t& ray, float minDistance, float maxDistance) {
 
 	bool rayHit = false;
 	float closestDistance = maxDistance;
+	raycastHit_t raycastHit;
 
 	// check if scene objects are hit by the ray
 	for (auto& object : objects) {

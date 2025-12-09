@@ -50,3 +50,14 @@ inline color4_t ColorConvert(const SDL_Color& color)
 
 	return color4;
 }
+
+inline color3_t GetAverageColor(const color3_t color, int numAvg)
+{
+	color3_t color3;
+
+	color3.r = color.r / numAvg;
+	color3.g = color.g / numAvg;
+	color3.b = color.b / numAvg;
+
+	return color3;
+}

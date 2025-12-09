@@ -35,6 +35,8 @@ int main() {
 		scene.AddObject(std::move(sphere));
 	}
 
+	scene.Render(framebuffer, camera, 100);
+
 	SDL_Event event;
 	bool quit = false;
 	while (!quit) {
@@ -51,8 +53,8 @@ int main() {
 		}
 
 		// draw to frame buffer
-		framebuffer.Clear({ 0, 0, 0, 255 });
-		scene.Render(framebuffer, camera, 50);
+		//framebuffer.Clear({ 0, 0, 0, 255 });
+		// scene Render
 
 		// update frame buffer, copy buffer pixels to texture
 		framebuffer.Update();
