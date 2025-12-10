@@ -2,6 +2,9 @@
 
 #include "Color.h"
 #include <glm/glm.hpp>
+#include <memory>
+// Forward declaration to avoid circular dependency with Material.h
+class Material;
 
 struct ray_t
 {
@@ -24,6 +27,7 @@ struct raycastHit_t
 	glm::vec3 point;	// point of ray hit
 	glm::vec3 normal;	// normal of surface hit
 	float distance;	// distance from ray origin to hit
+    color3_t color;    // surface color at hit
 
-	color3_t color;	// hit object material
+	std::shared_ptr<Material> material;	// hit object material
 };

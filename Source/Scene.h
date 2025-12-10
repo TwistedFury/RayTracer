@@ -20,7 +20,7 @@ public:
 
 private:
 	// trace the ray into the scene
-    color3_t Trace(const ray_t& ray, float minDistance, float maxDistance);
+    color3_t Trace(const ray_t& ray, float minDistance, float maxDistance, int maxDepth);
 
 private:
 	color3_t skyBottom{ 1 };

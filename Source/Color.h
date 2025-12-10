@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
 #include <algorithm>
 

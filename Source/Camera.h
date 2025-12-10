@@ -1,5 +1,6 @@
 #pragma once
 #include "Ray.h"
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
 
 class Camera

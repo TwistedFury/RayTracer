@@ -3,8 +3,8 @@
 #include "Camera.h"
 #include "Scene.h"
 #include "Sphere.h"
+#include "Random.h"
 
-#include <random>
 #include <iostream>
 
 int main() {
@@ -25,17 +25,21 @@ int main() {
 	Scene scene;
 	scene.SetSky({ 1, 1, 1 }, { 0, 0, 0 });
 
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_real_distribution<float> dist(-3.0f, 3.0f);
+	auto red = std::make_shared<Lambertian>(color3_t{ 1.0f, 0.0f, 0.0f });
+	auto green = std::make_shared<Lambertian>(color3_t{ 0.0f, 1.0f, 0.0f });
+	auto blue = std::make_shared<Lambertian>(color3_t{ 0.0f, 0.0f, 1.0f });
+	auto light = std::make_shared<Emissive>(color3_t{ 1.0f, 1.0f, 1.0f }, 3.0f);
+	auto metal = std::make_shared<Metal>(color3_t{ 1.0f, 1.0f, 1.0f }, 0.0f);
+	std::vector<std::shared_ptr<Material>> materials = {red, green, blue, light, metal};
 
-	for (int i = 0; i < 5; i++) {
-		glm::vec3 position{ dist(gen), dist(gen), dist(gen) };
-		auto sphere = std::make_unique<Sphere>(position, 1.0f, color3_t{ 1, 0, 0 });
+	for (int i = 0; i < 15; i++) {
+		glm::vec3 position = random::getReal(glm::vec3{ -3.0f }, glm::vec3{ 3.0f });
+
+		std::unique_ptr<Object> sphere = std::make_unique<Sphere>(Transform{ position }, random::getReal(0.2f, 1.0f), materials[random::getInt(materials.size())]);
 		scene.AddObject(std::move(sphere));
 	}
 
-	scene.Render(framebuffer, camera, 100);
+	scene.Render(framebuffer, camera, 500);
 
 	SDL_Event event;
 	bool quit = false;
