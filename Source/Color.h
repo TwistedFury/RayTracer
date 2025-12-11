@@ -3,10 +3,21 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
 #include <algorithm>
+#include <glm/gtx/color_space.hpp>
 
 // use alias to clarify type name
 using color3_t = glm::vec3;
 using color4_t = glm::vec4;
+
+inline color3_t HSVtoRGB(const glm::vec3& hsv)
+{
+	return glm::rgbColor(hsv);
+}
+
+inline color3_t HSVtoRGB(float hue, float saturation, float value)
+{
+	return glm::rgbColor(glm::vec3{ hue, saturation, value });
+}
 
 inline float LinearToGamma(float linear)
 {

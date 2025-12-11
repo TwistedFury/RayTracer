@@ -28,12 +28,13 @@ void Scene::Render(Framebuffer& framebuffer, const Camera& camera, int numSample
 				// get ray from camera
 				ray_t ray = camera.GetRay(point);
 				// trace ray
-				color += Trace(ray, 1e-3f, 100.0f, 2); // maxDepth = 2 for 2 bounces
+				color += Trace(ray, 1e-3f, 100.0f, 7); // maxDepth = 7 for 7 bounces
 			}
 			// get average color = (color / number samples)
 			color = GetAverageColor(color, numSamples);
 			framebuffer.DrawPoint(x, y, ColorConvert(color));
 		}
+        std::cout << y << std::endl;
 	}
 }
 

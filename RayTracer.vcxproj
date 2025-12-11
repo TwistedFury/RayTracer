@@ -147,6 +147,7 @@
     <ClCompile Include="Source\Framebuffer.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Material.cpp" />
+    <ClCompile Include="Source\Plane.cpp" />
     <ClCompile Include="Source\Renderer.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\Sphere.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Math.h" />
     <ClInclude Include="Source\Object.h" />
+    <ClInclude Include="Source\Plane.h" />
     <ClInclude Include="Source\Random.h" />
     <ClInclude Include="Source\Ray.h" />
     <ClInclude Include="Source\Renderer.h" />
